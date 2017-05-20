@@ -64,6 +64,18 @@ the LSP.
 % is used.
 \maketitle
 
+\section{Preface}
+
+The purpose of this document is to lay out the high-level vision for the {\bf LSST Science Platform (LSP)}, a set of web applications and services through which the the scientific community will to access, visualize, interact with, and analyze LSST data holdings. With its companion document -- the Data Products Definition Document (\DPDD) -- it defines the high-level vision for LSST's end-user deliverables.
+\\
+
+To a future LSST user, this document should illustrate what will be made available to the science community through the LSST Data Access Centers. To LSST builders, it provides direction on how to flow down the LSST System Requirements Document to system design, sizing, budget and schedule as they pertain to the end-user services provided at the LSST Data Access Centers.
+\\
+
+Though under strict change control\footnote{LSST Docushare handle for this document is {\tt LSE-XXX}.}, this is a {\bf \em living document}. LSST will undergo a period of construction  and commissioning lasting no less than seven years, followed by a decade of survey operations. To ensure their continued scientific adequacy, the high-level vision for LSST Science Platform will be periodically reviewed and updated.
+
+\clearpage
+
 \section{Introduction}
 
 \subsection{Goals and Philosophy}
@@ -109,26 +121,12 @@ the {\bf JupyterLab} analysis environment, and a machine-accessible {\bf Web API
 The {\bf Portal} aspect is a web portal designed to provide the essential data
 access and visualization services through a simple-to-use website.  It will
 enable browsing and visualization of the available datasets in ways the
-users are accustomed to at archives such as IRSA, MAST, or the SDSS archive,
-with an enhanced level of interactivity in line with expectations for
-then-contemporary archive portals.  Through the Portal, the users will be
-able to view the LSST images, request subsets of data (via simple forms or
-SQL queries), store the results of such queries to their personal
-workspaces, construct commonly requested plots, and generally explore the
-LSST dataset in a way that allows them to identify and access (subsets of)
-data required by their science case.
+users are accustomed to at archives such as IRSA, MAST, or the SDSS archive.
 
-The {\bf JupyterLab} aspect, based on the Jupyter family of technologies (such as
-JupyterHub and JupyterLab), will be provided to allow for more sophisticated
-data selection, analysis, and creation of added value (Level 3) data
-products.  This environment will come preinstalled with a library of
-commonly used and useful software Tools (such as AstroPy, LSST software
-stack, Anaconda Scientific Python Distribution, and others).  The users will
-be able to upload and install their own tools as well.
-
-The JupyterLab user experience will be nearly identical to working with
-Jupyter notebooks locally, except that computation and analysis will occur
-at resources provided at the LSST Data Access Center.  This is an
+The {\bf JupyterLab} aspect will provide a Jupiter Notebook-like interface, and 
+is geared towards enabling next-to-the-data analysis. The user experience will 
+be nearly identical to working with Jupyter notebooks locally, except that computation
+and analysis will occur at resources provided at the LSST Data Access Center.  This is an
 implementation of the “bringing computation to the data” paradigm: rather
 than imposing the burden of downloading, storing, and processing (large)
 subsets of LSST data at their home institutions, we will enable our users to
@@ -136,65 +134,70 @@ bring their codes and perform their analysis at the LSST DAC.  We expect
 this will reduce the barrier to entry and shorten the path to science for
 the LSST science community.
 
-Queries, visualizations, and analysis performed through the Portal and
-Notebooks will be served by a shared computing cluster, file storage, and
-database resource (bottom row of Figure~\ref{fig:layeredLSP}).  At start of operations,
-this computing cluster will number 2,400 cores (approximately 18 TFLOPs),
-with 4 PB of file and 3 PB of database storage (numbers for the U.S.  DAC). 
-These will be shared by all users, the number of whom we’re estimating in
-the low thousands.
+The third, {\bf Web API}, aspect of the LSST Science Platform will expose the
+services offered by the LSST Data Access Centers to other software tools and
+services using commonly accepted protocols (e.g. industry-standard protocols
+such as WebDAV, or Virtual Observatory protocols such as TAP or SIAP). This
+interface will open the possibility for remote access and analysis of the LSST 
+data set using well-known applications such as TOPCAT or libraries like AstroPy.
 
-Not all users will be accessing the computing cluster concurrently; though
-difficult to predict with accuracy because of a lack of direct comparables,
-an estimate on order of a ~100 concurrent users is likely reasonable.  This
-would translate to typical allocations of ~20 cores per user, sufficient to
-enable preliminary end-user science analyses (working on catalogs, smaller
-number of images) and creation of some added-value (Level 3) data products. 
-A good analogy is one of being given a server with a few TB of disk, few TB
-of database storage, that is co-located next to the LSST data, and with a
-chance to use tens to hundreds of cores for analysis (depending on system
-load).
-
-For larger endeavors (e.g., pixel-level reprocessing of the entire LSST
-dataset), the users will be steered towards resources beyond the LSST DACs
-(e.g., national supercomputing centers, university computing centers, or the
-public cloud).  Backend Science Platform services (including access to
-databases, images, and other files) will be exposed through
-machine-accessible web APIs serving community-accepted formats and
-protocols.  This will make it easy to initiate remote computations operating
-on LSST data.  Virtual Observatory interfaces will allow connection to other
-archives and enable the use of standard tools such as TOPCAT or Aladin. 
-This will further lower the barrier to access to LSST data, shortening the
-path to science.
-
-Finally, the LSST Science Platform is being designed to allow for
+Finally, the LSST Science Platform is being envisioned to enable and encourage
 collaborative work.  The capabilities ranging from sharing of derived
 datasets within smaller groups, collaborations, or with the broader LSST
 community, to collaborative visualization and editing capabilities expected
-to become available within the Jupyter ecosystem.
+to become available within the JupyterLab ecosystem.
 
 \section{Enabling Remote Data Access and Analysis}
 
 \subsection{Web Portal}
+
+\begin{figure}
+	\centering
+	\scalebox{0.4}{\includegraphics{images/fig-portal-esasky}}
+	\caption{The "ESA Sky" web portal interface to ESA Archive holdings. The LSST portal user
+		experience will support similar modern pan/zoom/select metaphor for exploration and visualization of the LSST data set.
+		\label{fig:portalESA}}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\scalebox{0.4}{\includegraphics{images/fig-portal-irsa}}
+	\caption{The web portal interface to the WISE data set at the Infra-Red Science Archive at IPAC. The LSST portal is being built by extending the Firefly toolkit that powers the IRSA/WISE archive.
+		\label{fig:portalIRSA}}
+\end{figure}
 
 The {\bf Portal} aspect is a web portal designed to provide the essential data
 access and visualization services through a simple-to-use website.  It will
 enable browsing and visualization of the available datasets in ways the
 users are accustomed to at archives such as IRSA, MAST, or the SDSS archive,
 with an enhanced level of interactivity in line with expectations for
-then-contemporary archive portals.  Through the Portal, the users will be
+then-contemporary archive portals (similar to that found in ESASky and 
+the DECaLS Viewer). Examples of the types of user experiences to be offered
+through the LSST portal are shown in Figures~\ref{fig:portalESA}~and~\ref{fig:portalIRSA}.
+
+Through the Portal, the users will be
 able to view the LSST images, request subsets of data (via simple forms or
 SQL queries), store the results of such queries to their personal
 workspaces, construct commonly requested plots, and generally explore the
 LSST dataset in a way that allows them to identify and access (subsets of)
 data required by their science case.
 
-\subsection{Jupyter Notebooks}
+\subsection{JupyterLab}
+
+\begin{figure}
+	\centering
+	\scalebox{0.4}{\includegraphics[scale=0.7]{images/jlab-screenshot-nb-con-term-2}}
+	\caption{A screen capture of the JupyterLab interface (credit: JupyterLab team, \url{http://blog.jupyter.org/2016/07/14/jupyter-lab-alpha/})
+		\label{fig:JupyterLab}}
+\end{figure}
 
 The {\bf JupyterLab} aspect, based on the Jupyter family of technologies (such as
 JupyterHub and JupyterLab), will be provided to allow for more sophisticated
 data selection, analysis, and creation of added value (Level 3) data
-products.  This environment will come preinstalled with a library of
+products. A screen capture of a mature prototype of JupterLab is shown in 
+Figure~\ref{fig:JupyterLab}.
+
+This environment will come preinstalled with a library of
 commonly used and useful software Tools (such as AstroPy, LSST software
 stack, Anaconda Scientific Python Distribution, and others).  The users will
 be able to upload and install their own tools as well.
@@ -202,7 +205,7 @@ be able to upload and install their own tools as well.
 The JupyterLab user experience will be nearly identical to working with
 Jupyter notebooks locally, except that computation and analysis will occur
 at resources provided at the LSST Data Access Center.  This is an
-implementation of the “bringing computation to the data” paradigm: rather
+implementation of the “bringing analysis to the data” paradigm: rather
 than imposing the burden of downloading, storing, and processing (large)
 subsets of LSST data at their home institutions, we will enable our users to
 bring their codes and perform their analysis at the LSST DAC.  We expect
@@ -211,11 +214,31 @@ the LSST science community.
 
 \subsection{Web APIs}
 
-\section{Hosting Level 1 and 2: Database and Alert Filtering Services}
+Backend Science Platform services (including access to
+databases, images, and other files) will be exposed through
+machine-accessible web APIs serving community-accepted formats and
+protocols.  This will make it easy to initiate remote computations operating
+on LSST data.  Virtual Observatory interfaces will allow connection to other
+archives and enable the use of standard tools such as TOPCAT or DS9. 
+This will further lower the barrier to access to LSST data, shortening the
+path to science.
 
-\subsection{Relational Databases}
+\begin{figure}
+	\centering
+	\scalebox{0.4}{\includegraphics[scale=0.7]{images/topcat-StackPlotWindow}}
+	\caption{A screen capture of Tool for OPerations on Catalogues And Tables (TOPCAT), that is capable of remotely accessing catalogs and images using VO protocols. Tools such as these will be able to directly access the data sets served by the LSST DACs (figure credit: Mark Taylor, \url{http://www.star.bris.ac.uk/~mbt/topcat/sun253/sun253.html}).
+		\label{fig:toolsTOPCAT}}
+\end{figure}
 
-Most LSST catalog data products will be offered in relational databases...
+\section{Serving Level 1 and 2: Database and Alert Filtering Services}
+
+All data products will be made available using user-friendly databases and web services. In this section, we describe the high-level concepts for services used to serve the LSST catalogs and the event alert stream. Further details of the LSST data products may be found in the LSST Data Products Definition Document (\DPDD).
+
+\subsection{Serving Catalog Holdings: Relational Databases}
+
+Catalogs are the primary and most frequently used of all LSST data products. Based on surveying the community
+
+To decide which technology best fits the LSST requirements, we did an extensive market research and analyses, reviewed relevant literature, and run appropriate stress-tests for selected “promising” candidates, focusing on weak points and the most uncertain aspects. Market research and analyses involved (a) discussions about lessons learned with many industrial and scientific users dealing with large data sets, (b) discussions about existing solutions and future product road-maps with leading solution providers and promising start-ups, and (c), research road-map with leading database researchers from academia. See 16   Appendix E: People/Communities We Talked To.
 
 \subsection{Alert Filtering Services}
 
@@ -266,14 +289,7 @@ load).
 For larger endeavors (e.g., pixel-level reprocessing of the entire LSST
 dataset), the users will be steered towards resources beyond the LSST DACs
 (e.g., national supercomputing centers, university computing centers, or the
-public cloud).  Backend Science Platform services (including access to
-databases, images, and other files) will be exposed through
-machine-accessible web APIs serving community-accepted formats and
-protocols.  This will make it easy to initiate remote computations operating
-on LSST data.  Virtual Observatory interfaces will allow connection to other
-archives and enable the use of standard tools such as TOPCAT or Aladin. 
-This will further lower the barrier to access to LSST data, shortening the
-path to science.
+public cloud).
 
 % \subsection{Computing}
 
