@@ -44,8 +44,8 @@ and analyze LSST data holdings.
 \\
 
 It is meant to inform the development of requirements, product specifications,
-prioritization, and plans for the elements of the DM system that together comprise
-the LSP.
+prioritization, and plans for the Agile development of elements of the DM system 
+that together make up the LSP.
 
 }
 
@@ -83,13 +83,15 @@ Though under strict change control\footnote{LSST Docushare handle for this docum
 The LSST is a facility whose primary mission is to acquire, process, and
 make available the data collected by its telescope and camera, as well as
 enable ``next-to-the-data'' creation of added-value (Level 3) data products
-\cite{SRD}.
+(\SRD).
 
 This document describes the vision for the services to be put into place to
 fulfill the ``{\em making available}'' and ``{\em Level 3} creation``
 aspects of LSST's mission; its aim is to present a high-level
 description of the data access and analysis services provided at the
-LSST Data Access Centers.
+LSST Data Access Centers. It should be read in conjunction with the
+LSST Data Products Definition Document (\DPDD), which provides the high-level
+description of LSST data products.
 
 \subsection{LSST Science Platform Overview}
 
@@ -147,7 +149,7 @@ datasets within smaller groups, collaborations, or with the broader LSST
 community, to collaborative visualization and editing capabilities expected
 to become available within the JupyterLab ecosystem.
 
-\section{Enabling Remote Data Access and Analysis}
+\section{User-facing Services}
 
 \subsection{Web Portal}
 
@@ -212,6 +214,17 @@ bring their codes and perform their analysis at the LSST DAC.  We expect
 this will reduce the barrier to entry and shorten the path to science for
 the LSST science community.
 
+Add something about writing glue code to make it easy to submit jobs,
+and how Notebooks will be the primary user interface to the backend batch system...
+
+The JupyterLab aspect of the science platform will play a key role in commissioning,
+quality assessment, and science validation of the as-built system. It will be the primary
+method of performing interactive analysis of acquired data (e.g. adjusting and executing
+prepared notebooks driving commissioning tasks), as well as commanding
+the batch resources to execute larger processing tasks.
+
+% Data sets acquired during commissioning, as well as precursor and simulated data sets processed for quality assessment and science validation while construction is ongoing, will appear in the commissioning workspace, ready for operator analysis using tools and
+
 \subsection{Web APIs}
 
 Backend Science Platform services (including access to
@@ -230,42 +243,44 @@ path to science.
 		\label{fig:toolsTOPCAT}}
 \end{figure}
 
-\section{Serving Level 1 and 2: Database and Alert Filtering Services}
+\subsection{Integrated environment}
 
-All data products will be made available using user-friendly databases and web services. In this section, we describe the high-level concepts for services used to serve the LSST catalogs and the event alert stream. Further details of the LSST data products may be found in the LSST Data Products Definition Document (\DPDD).
+All aspects of the Platform are intended to be {\it well integrated}, enabling a seamless workflow for the users to be able to move back and forth between them as needs dictate.  Our goal is to enable a user to find or create data in one aspect, and view or analyze that data in another.
 
-\subsection{Serving Catalog Holdings: Relational Databases}
+As an example of how these connections can aid a user in exploring the LSST data, data queries will be shareable across the Portal and JupyterLab. This will allow a user to build a query using the Portal user interface, view the (possibly initial) results by browsing it in the Portal, and then access the final results from JupyterLab or a remotely connected client (e.g. TOPCAT) for further analysis. The reverse flow will also be enabled; a user can code and submit a complex SQL query in the Notebook and then browse and visualize the results in the Portal.
 
-Catalogs are the primary and most frequently used of all LSST data products. Based on surveying the community
+\subsection{Supporting Collaborative Work}
 
-To decide which technology best fits the LSST requirements, we did an extensive market research and analyses, reviewed relevant literature, and run appropriate stress-tests for selected “promising” candidates, focusing on weak points and the most uncertain aspects. Market research and analyses involved (a) discussions about lessons learned with many industrial and scientific users dealing with large data sets, (b) discussions about existing solutions and future product road-maps with leading solution providers and promising start-ups, and (c), research road-map with leading database researchers from academia. See 16   Appendix E: People/Communities We Talked To.
+The LSST Science Platform will allow for collaborative work at two levels:
+\begin{itemize}
+	\item {\bf Workspaces}: Creation and sharing of data sets -- catalogs, images, queries, and other data products -- within a pre-defined group (eg., a research group at a University, or a large science collaboration). Such groups would have access to a shared virtual ``workspace'' within the LSST DAC, within which they can share file and catalog assets as well as allocated computing cycles. This shared workspace will be equally ``visible'' from all three aspects of the platform.
+	
+	\item {\bf Shared editing}: We expect to offer a ``Google Docs''-like collaborative editing, visualization, and data analysis capabilities. These are expected to become available within the Jupyter ecosystem, and will be included in the JupyterLab aspect as they do.
+\end{itemize}
 
-\subsection{Alert Filtering Services}
+The levels of support for collaboration described above responsive to the large majority of user needs identified by end-user focus groups in R\&D. At the same time, they minimizing the technical risks by leveraging widely used and well understood technologies (SDSS MyDB-like user databases, backend A\&A mechanisms, VO protocols, Jupyter).
 
-A major Level 1 product of the LSST will be a stream of {\em Event Alerts}, notifications to changes in astrophysical scenery discovered by differencing incoming images against older, deeper, images of the sky in the same direction. These alerts are expected to be numerous --  approaching 10 thousand per visit, totaling 10 million per night -- and transmitted promptly -- with new alerts broadcast within only a minute after observation. More details about event alerts and their content can be found in the \DPDD, Section~4.5.
+\section{Backend Services}
 
-To make the alert stream useful to the end-users, LSST will provide a basic alert filtering service. This service will run at the LSST U.S. Archive Center (at NCSA). It will let users create simple filters that select the alerts, as well as the subset of data contained in the alerts, that are ultimately forwarded on to them. These {\em user defined filters} will be possible to specify using an SQL-like declarative language, or short snippets of (likely Python) code. For example, here's what a filter may look like:
-\begin{verbatim}
-# Keep only never-before-seen events within two
-# effective radii of a galaxy. This is for illustration
-# only; the exact methods/members/APIs may change.
+** UNFINISHED **
 
-def filter(alert):
-	if len(alert.sources) > 1:
-		return False
-	nn = alert.diaobject.nearest_neighbors[0]
-	if not nn.flags.GALAXY:
-		return False
-	return nn.dist < 2. * nn.Re
-\end{verbatim}
+While 
 
-This service should be thought of as the Level 1 Event Alert analog of the SQL querying capability provided for the Level 2 Catalogs: just as the RDBMS allows the end-user to sub-select both rows and columns of data stored in the Level 2 catalogs (e.g. "select and return PSF magnitudes of point sources whose g-r magnitude is less than 0.2"), the Alert Filtering service allows the user to similarly filter the real-time stream of events (e.g. "filter and pass on PSF magnitudes of point source events whose magnitude excursion is more than 1mag")
+\subsection{Serving Level 1 and 2 Data Products}
 
-We note that this LSST-provided capability will be limited, and is not intended to satisfy the wide variety of use cases that a full-fledged public Event Broker could. For example, beyond a few pre-defined filters, we do not plan to provide any advanced classification (eg., ``is the light curve consistent with an specific type of variable"). No information beyond what is contained in the \VOEvent packet will be available to user-defined filters (eg., no cross-matches to other catalogs). For such more advanced uses, we expect the community will deploy and operate one or more Event Broker.
+** UNFINISHED **
 
-Furthermore, the complexity and run time of user defined filters will be limited by available resources, and execution latency will not be guaranteed. The number of \VOEvents transmitted to each user per user will be limited as well: we expect to be able to transmit at least up to $\sim 20$ full-sized event alerts per visit per user, dynamically throttled depending on load. Finally, the total number of simultaneous subscribers is likely to be limited -- in case of overwhelming interest, a TAC-like proposal process may be instituted.
+All data products will be made available using user-friendly databases and web services. More
+
+In this section, we describe the high-level concepts for services used to serve the LSST catalogs and the event alert stream. Further details of the LSST data products may be found in the LSST Data Products Definition Document (\DPDD).
 
 \section{Enabling Level 3: User Databases, File storage, and Computing}
+
+** UNFINISHED **
+
+--Need to say something about a batch system and MyDB type functionality being 
+available to the user. May want to move some of the below discussion to
+JupyterLab section? Is this the place to introduce the Workspace concept?--
 
 Queries, visualizations, and analysis performed through the Portal and
 Notebooks will be served by a shared computing cluster, file storage, and
@@ -291,10 +306,47 @@ dataset), the users will be steered towards resources beyond the LSST DACs
 (e.g., national supercomputing centers, university computing centers, or the
 public cloud).
 
-% \subsection{Computing}
+\section{Development Methodology and Prioritization Guidance}
 
-% \subsection{File Storage}
+\subsection{Iterative Development Leveraging Existing Technologies }
 
-% \subsection{User Databases}
+The services constructed for the LSST Science Platform will be developed following the iterative, Agile methodology. This is especially desirable for user-facing services, where iterative development and nearly continuous stakeholder feedback provide guidance as to the details of features to be implemented, and the delivery of intermediate milestones.
+
+The development of the LSP Portal. JupyterLab, as well as Web API aspects will start from significant existing code bases, standards, and prior art. This is a deliberate approach designed to minimize risk, and leverage end-user familiarity with these interfaces, thus reducing the barrier to adoption of the interface eventually deployed for LSST.
+
+The {\bf Portal} is based on existing, production quality, archive portal interface developed at IRSA/IPAC -- the {\em Firefly} toolkit. The primary challenge is integrating the existing Firefly code, and updating the user experience to conform to anticipated user expectations (e.g., supporting all-sky maps and pan/zoom/click-type exploration). Consistent with the general philosophy, DM should look at achieving the necessary upgrades by re-using existing well-known tools and libraries (e.g. Aladin Lite).
+
+Similarly, the {\bf JupyterLab} environment will be based on the open-source JupyterLab product delivered and maintained by the Juptyter team. The development of the JupyterLab aspect of the LSST Science Platform should focus on deployment and integration with the backend services and other aspects of the platform, rather than developing new or radically different features within the JupyterLab product.
+
+Finally, the {\bf Web API} aspect is envisioned as implementing existing, widely-adopted, community protocols (e.g. such as those from Virtual Observatory suite of protocols and standards), down to leveraging existing libraries wherever appropriate.
+
+\subsection{Prioritization Guidance}
+
+Here we give some overall feature prioritization guidance, to enable the construction of initial (mostly functional) requirements and intermediate development milestones.
+
+Portal aspect:
+\begin{enumerate}
+	\item Deployment of the initial Firefly back-end within the (prototype) LSST Data Access Center at NCSA.
+	\item Integration of the initial Firefly front- and back-ends with the LSP backend services. For example, this includes the authentication and authorization mechanisms, relational databases, file stores, etc.
+	\item User experience improvements, such as addition all-sky maps with pan/zoom/select navigation metaphors, modernization of the look-and-feel, streamlining of the UI and deprecation of rarely used widgets. {\bf Once this level of functionality is met (at scale), the Portal aspect will have achieved the minimum level of viability for deployment to operations}.
+	\item Improved user workflow integration with other aspects of the LSST Science Platform. For example, it should be possible to begin data exploration in the Portal (e.g., by interactively selecting data sets) and seamlessly transfer the sub-selected catalogs and images to the JupyterLab environment for further, more complex, analysis using provided Python libraries.
+	\item Addition of new new widgets and abilities to the Portal, that address most requested and broadly useful end-user needs.
+	\item Widget-level integration with JupyterLab.
+\end{enumerate}
+
+JupyterLab aspect:
+\begin{enumerate}
+	\item Deployment of the initial JupyterLab product within the (prototype) LSST Data Access Center at NCSA.
+	\item Integration of the JupyterLab product with LSP backend services, most notably authentication and authorization, user management, databases, and file stores. {\bf Once this level of functionality is met (at scale), the JupyterLab aspect will have achieved the minimum level of viability for deployment to operations}.
+	\item Development of libraries and utilities to ease the submission of user-written code from Jupyter notebooks to the batch system.
+	\item Creation and curation of a library of 3rd party code that will be made available to LSP end-users.
+\end{enumerate}
+
+Web APIs:
+\begin{enumerate}
+	\item Development and deployment of initial data access APIs needed to satisfy the back-end needs of the Portal and JupyterLab aspects. These may not yet "speak" the final, standards-compliant, protocols.
+	\item Integration of the Web API aspect with LSP backend services, most notably authentication and authorization, user management, databases, and file stores. 
+	\item Deployment of standards-compliant protocols throughout the Web API aspect, and integration with all other elements of the Platform. {\bf Once this level of functionality is met (at scale), the Web API aspect will have achieved the minimum level of viability for deployment to operations}.
+\end{enumerate}
 
 \end{document}
