@@ -231,6 +231,8 @@ We will provide JupyterLab instances to LSST users in an environment carrying a
 library of preinstalled commonly used and useful software tools:
 AstroPy, the LSST science pipelines, Anaconda Scientific Python Distribution,
 and others. The users will be able to upload and install their own tools as well.
+Non-trivial shared computing cluster resources will be accessible through this
+environment as well, enabling Level 3 data products generation.
 
 % Add something about writing glue code to make it easy to submit jobs, and how Notebooks will be the primary user interface to the backend batch system...
 
@@ -293,7 +295,7 @@ The levels of support for collaboration described above are responsive to the la
 
 \section{Backend Services\label{sec:backend}}
 
-The user-facing aspects of the LSST Science Platform will be built on top of a number of backend services that can roughly be divided into three categories: {\bf file services}, {\bf database services}, and {\bf puting} services (bottom row of Figure~\ref{fig:layeredLSP}). The details of these services are described in the Data Management Design Document (\citeds{LDM-148}) and other associated documents; here, we only provide the high-level guidance as to the capabilities which these services will need to expose to the user (through the three aspects).
+The user-facing aspects of the LSST Science Platform will be built on top of a number of backend services that can roughly be divided into three categories: {\bf file services}, {\bf database services}, and {\bf computing} services (bottom row of Figure~\ref{fig:layeredLSP}). The details of these services are described in the Data Management Design Document (\citeds{LDM-148}) and other associated documents; here, we only provide the high-level guidance as to the capabilities which these services will need to expose to the user (through the three aspects).
 
 \subsection{Database Services}
 
@@ -361,7 +363,7 @@ Here we give some overall feature prioritization guidance, to enable the constru
 Portal aspect:
 \begin{enumerate}
 	\item Deployment of the initial Firefly back-end within the (prototype) LSST Data Access Center at NCSA.
-	\item Integration of the initial Firefly front- and back-ends with LSP backend services. For example, this includes the authentication and authorization mechanisms, relational databases, file stores, etc.
+	\item Integration of the initial Firefly front- and back-ends with LSST Science Platform backend services. For example, this includes the authentication and authorization mechanisms, relational databases, file stores, etc.
 	\item User experience improvements, such as addition all-sky maps with pan/zoom/select navigation metaphors, modernization of the look-and-feel, streamlining of the UI and deprecation of rarely used widgets. {\bf Once this level of functionality is met (at scale), the Portal aspect will have achieved the minimum level of viability for deployment to operations}.
 	\item Improved user workflow integration with other aspects of the LSST Science Platform. For example, it should be possible to begin data exploration in the Portal (e.g., by interactively selecting data sets) and seamlessly transfer the sub-selected catalogs and images to the JupyterLab environment for further, more complex, analysis using provided Python libraries.
 	\item Addition of new widgets and abilities to the Portal, that address most requested and broadly useful end-user needs.
