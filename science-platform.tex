@@ -78,9 +78,8 @@ This document lays out the high-level vision for the aforementioned aspects and 
 \subsection{Goals}
 
 The LSST is a facility whose primary mission is to acquire, process, and
-make available the data collected by its telescope and camera, as well as
-enable ``next-to-the-data'' creation of added-value (Level 3) data products
-(\SRD).
+make available the data\footnote{This includes the raw and processed calibration and engineering data, in addition to the data collected by the science sensors. Because much of LSST science will be systematics limited, access to engineering data will enable a better understanding and correction of subtle instrumental and/or environmental effects.} collected by its telescope and camera, as well as enable ``next-to-the-data'' creation of added-value (Level 3) data products
+(see the \SRD and the \LSR).
 
 This document describes the vision for the services to be put into place to
 fulfill the ``{\em making available}'' and ``{\em Level 3} creation``
@@ -120,16 +119,16 @@ The platform exposes the LSST data
 and services to the user through three primary user-facing ``{\it aspects}'' -- the web {\bf Portal},
 the {\bf JupyterLab} analysis environment, and a machine-accessible {\bf Web API} interface. These aspects provide three different ways to access the data sets and analysis services provided in the LSST Data Access Centers (Figure~\ref{fig:layeredLSP}).
 
-The {\bf Portal} aspect is a web portal designed to provide the essential data
+The first, {\bf Portal}, aspect is a web portal designed to provide the essential data
 access and visualization services through a simple-to-use website.  It will
 enable browsing and visualization of the available datasets in ways the
 users are accustomed to at archives such as IRSA, MAST, or the SDSS archive.
 We describe it in more detail in \secref{sec:portal}.
 
-The {\bf JupyterLab} aspect will provide a Jupyter Notebook-like interface, and 
+The second, {\bf JupyterLab}, aspect will provide a Jupyter Notebook-like interface, and 
 is geared towards enabling next-to-the-data analysis. The user experience will 
 be nearly identical to working with Jupyter notebooks locally, except that computation
-and analysis will occur at resources provided at the LSST Data Access Center.  This is an
+and analysis will occur with resources provided at the LSST Data Access Center.  This is an
 implementation of the “bringing computation to the data” paradigm: rather
 than imposing the burden of downloading, storing, and processing (potentially large)
 subsets of LSST data at their home institutions, we will enable our users to
@@ -148,11 +147,7 @@ or libraries like Astropy). Furthermore, the offered APIs will allow for federat
 with other astronomical archives, bringing added value to the LSST dataset.
 We describe it in more detail in \secref{sec:apis}.
 
-Enabling these user-facing aspects is a set of backend services including
-Database, File Storage, and Batch Computing services. These services will provide
-the computational power and data storage and analytics capabilities needed to
-enable LSST data analysis as well as the creation and federation of Level 3 products.
-We further describe these in \secref{sec:backend}.
+Enabling these user-facing aspects is a set of backend services. The Data Releases will be organized as catalogs kept in relational database management systems, as well as repositories of files. The alert distribution system will facilitate the distribution of Alert Streams to community brokers and end-users (see the \DPDD for details). These services will be complemented by additional User Database, File Storage, and Batch Computing services, as well as pre-installed Software Tools suite. They will provide the computational power, data storage, and analytics capabilities needed to enable LSST data analysis as well as the creation and federation of Level 3 products. We further describe these in \secref{sec:backend}.
 
 Finally, the LSST Science Platform is being envisioned to enable and encourage
 collaborative work.  The capabilities ranging from sharing of derived
@@ -276,7 +271,7 @@ SIAP (for images) must be supported.
 
 \subsection{Integrated environment}
 
-All aspects of the Platform are intended to be {\it well integrated}, enabling a seamless workflow so the users to be able to move back and forth between them as needs dictate.  The aim is to enable a user to find or create data in one Platform aspect, and view or analyze that data in another.
+All aspects of the LSST Science Platform are intended to be {\it well integrated}, enabling a seamless workflow so the users to be able to move back and forth between them as needs dictate.  The aim is to enable a user to find or create data in one Platform aspect, and view or analyze that data in another.
 
 As an example of how these connections can aid a user in exploring the LSST data, data queries will be shareable across the Portal and JupyterLab. This will allow a user to build a query using the Portal query builder widget, view the (possibly preliminary) results by browsing it there, and then access the final results from a JupyterLab notebook or a remotely connected client (e.g. TOPCAT) for further analysis. The reverse flow will also be enabled; a user can code and submit a complex SQL query in the Notebook, and then browse and visualize the results in the Portal.
 
