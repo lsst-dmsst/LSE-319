@@ -61,17 +61,17 @@ This document lays out the high-level vision for the aforementioned aspects and 
 % is used.
 \maketitle
 
-%\section{Preface}
-%
-%The purpose of this document is to lay out the high-level vision for the {\bf LSST Science Platform (LSP)}, a set of web applications and services through which the the scientific community will to access, visualize, interact with, and analyze LSST data holdings. With its companion document -- the Data Products Definition Document (\DPDD) -- it defines the high-level vision for LSST's end-user deliverables.
-%\\
-%
-%To a future LSST user, this document should illustrate what will be made available to the science community through the LSST Data Access Centers. To LSST builders, it provides direction on how to flow down the LSST System Requirements Document (\LSR) to Data Management requirements (\DMSR), DM System design (\citeds{LDM-144}) and associated documents), sizing (\citeds{LDM-144} and related documents), budget, and schedule as they pertain to the end-user services provided at the LSST Data Access Centers.
-%\\
-%
-%Though under strict change control\footnote{LSST Docushare handle for this document is {\tt LSE-XXX}.}, this is a {\bf \em living document}. LSST will undergo a period of construction  and commissioning lasting no less than seven years, followed by a decade of survey operations. To ensure their continued scientific adequacy, the high-level vision for LSST Science Platform will be periodically reviewed and updated.
-%
-%\clearpage
+\section{Preface}
+
+The purpose of this document is to lay out the high-level vision for the {\bf LSST Science Platform (LSP)}, a set of web applications and services through which the the scientific community will to access, visualize, interact with, and analyze LSST data holdings. With its companion document -- the Data Products Definition Document (\DPDD) -- it defines the high-level vision for LSST's end-user deliverables.
+\\
+
+To a future LSST user, this document should illustrate what will be made available to the science community through the LSST Data Access Centers. To LSST builders, it provides direction on how to flow down the LSST System Requirements Document (\LSR) to Data Management requirements (\DMSR) as they pertain to the end-user services provided at the LSST Data Access Centers.
+\\
+
+Though under strict change control, this is a {\bf \em living document}. LSST will undergo a period of construction  and commissioning lasting no less than seven years, followed by a decade of survey operations. To ensure their continued scientific adequacy, the high-level vision for LSST Science Platform will be periodically reviewed and updated.
+
+\clearpage
 
 \section{Introduction}
 
@@ -381,6 +381,14 @@ Web APIs:
 \end{enumerate}
 
 It is assumed that the development of backend services will be driven by the needs of the front-end aspects.
+
+\section{Design for Evolution}
+
+This document captures DM's response to our best estimate of what the expectations of LSST users are likely to be, starting with LSST Commissioning and through the first few years of LSST Operations.
+
+Through a decade of operations, it is likely that both the user expectations will change, as well as the technologies available to respond to them. For example, the emergence of Jupyter as the dominant mode of remote data analysis in the astronomical community has caused the present vision and design of the LSST Science Platform to be markedly different than the original conceptual design of the Science User Interface and Tools (LDM-131). There is no reason to believe that similar shifts will not happen in Operations as well.
+
+The LSST will therefore proactively design the LSST Science Platform services with such an evolution in mind, to a degree permitted by the available budget and schedule constraints. An example of such {\bf \em design for evolution} is the concept of loosely coupled aspects itself (the Portal, JupyterLab, and Web APIs), that all expose different views of the same underlying data model and workspace. Design principles like these will allow for additions of new LSST Science Platform aspects (e.g., a different Jupyter-like technology, should one emerge), replacements of aspects (e.g., migrating to a different Portal technology), as well as retirement of aspects that are not widely used.
 
 \clearpage
 
