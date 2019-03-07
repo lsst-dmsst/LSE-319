@@ -1,0 +1,45 @@
+\section{Development Methodology and Prioritization Guidance\label{sec:methdology}}
+
+\subsection{Iterative Development Leveraging Existing Technologies }
+
+The services constructed for the LSST Science Platform will be developed following the iterative Agile methodology. While most of LSST software development follows this approach, adopting it is especially advantageous for user-facing services. There, iterative development and nearly continuous stakeholder feedback can provide guidance as to the details of features to be implemented, the continued validity of the approach taken, and the expected focus of intermediate milestones.
+
+The development of the Portal, JupyterLab, as well as Web API aspects will start from significant existing code bases and prior art. This is a deliberate approach designed to minimize technological risk and leverage end-user familiarity with these interfaces. The latter also reduces the barrier to user adoption of the products eventually delivered for LSST.
+
+The \textbf{Portal} is based on existing, production quality, archive portal interface developed at IRSA/IPAC -- the \emph{Firefly} toolkit. The primary challenge is integrating the existing Firefly code, and updating the user experience to conform to anticipated user expectations (e.g., supporting all-sky maps and pan/zoom/click-type exploration). Consistent with the general philosophy, DM should look at achieving the necessary upgrades by re-using existing well-known libraries and tools (e.g. Aladin Lite).
+
+The \textbf{JupyterLab} environment will be based on the open-source JupyterLab product delivered and maintained by the Jupyter team. The development of the JupyterLab aspect of the LSST Science Platform will focus on deployment and integration with the LSST-specific backend services and other aspects of the platform, rather than developing new or radically different features within the JupyterLab product.
+
+Finally, the \textbf{Web API} aspect is envisioned as implementing existing, widely-adopted, community protocols (e.g. such as those from Virtual Observatory suite of protocols and standards). Similarly to other aspects, it will benefit from leveraging existing codes and libraries wherever appropriate.
+
+\subsection{Prioritization Guidance}
+
+Here we give some overall feature prioritization guidance, to enable the construction of initial (mostly functional) requirements and intermediate development milestones.
+
+Portal aspect:
+\begin{enumerate}
+	\item Deployment of the initial Firefly back-end within the (prototype) LSST Data Access Center at NCSA.
+	\item Integration of the initial Firefly front- and back-ends with LSST Science Platform backend services. For example, this includes the authentication and authorization mechanisms, relational databases, file stores, etc.
+	\item User experience improvements, such as addition of all-sky maps with pan/zoom/select navigation metaphors, modernization of the look-and-feel, streamlining of the UI and deprecation of rarely used widgets. \textbf{Once this level of functionality is met (at scale), the Portal aspect will have achieved the minimum level of viability for deployment to operations}.
+	\item Improved user workflow integration with other aspects of the LSST Science Platform. For example, it should be possible to begin data exploration in the Portal (e.g., by interactively selecting data sets) and seamlessly transfer the sub-selected catalogs and images to the JupyterLab environment for further, more complex, analysis using provided Python libraries.
+	\item Addition of new widgets and abilities to the Portal, that address most requested and broadly useful end-user needs.
+	\item Widget-level integration with JupyterLab.
+\end{enumerate}
+
+JupyterLab aspect:
+\begin{enumerate}
+	\item Deployment of the initial JupyterLab product within the (prototype) LSST Data Access Center at NCSA.
+	\item Integration of the JupyterLab product with LSP backend services, most notably authentication and authorization, user management, databases, and file stores. \textbf{Once this level of functionality is met (at scale), the JupyterLab aspect will have achieved the minimum level of viability for deployment to commissioning and operations}.
+	\item Development of libraries and utilities to ease the submission of user-written code from Jupyter notebooks to the batch compute system.
+	\item Creation and curation of a library of 3rd party code that will be made available to LSP end-users.
+\end{enumerate}
+
+Web APIs:
+\begin{enumerate}
+	\item Development and deployment of initial data access APIs needed to satisfy the back-end needs of the Portal and JupyterLab aspects. These may not yet "speak" the final, standards-compliant, protocols.
+	\item Integration of the Web API aspect with LSP backend services, most notably authentication and authorization, user management, databases, and file stores.
+	\item Deployment of critical protocols (including SCS, TAP, SIA, SODA, VOEvent streaming support, and VO Registry support) at commonly-encountered levels of standards compliance (eg., the most commonly used ADQL features). \textbf{Once this level of functionality is met (at scale), the Web API aspect will have achieved the minimum level of viability for deployment to operations}
+	\item Deployment of standards-compliant protocols throughout the Web API aspect, and integration with all other elements of the Platform.
+\end{enumerate}
+
+It is assumed that the development of backend services will be driven by the needs of the front-end aspects.

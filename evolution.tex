@@ -1,0 +1,7 @@
+\section{Design for Evolution\label{sec:evolution}}
+
+This document captures DM's response to our best estimate of what the expectations of LSST users are likely to be, starting with LSST Commissioning and through the first few years of LSST Operations.
+
+Through a decade of operations, it is likely that both the user expectations will change, as well as the technologies available to respond to them. For example, the emergence of Jupyter as the dominant mode of remote data analysis in the astronomical community has caused the present vision and design of the LSST Science Platform to be markedly different than the original conceptual design of the Science User Interface and Tools (LDM-131). There is no reason to believe that similar shifts will not happen in Operations as well.
+
+The LSST will therefore proactively design the LSST Science Platform services with such an evolution in mind, to a degree permitted by the available budget and schedule constraints. An example of such \textbf\emph{design for evolution} is the concept of loosely coupled aspects itself (the Portal, JupyterLab, and Web APIs), that all expose different views of the same underlying data model and workspace. Design principles like these will allow for additions of new LSST Science Platform aspects (e.g., a different Jupyter-like technology, should one emerge), replacements of aspects (e.g., migrating to a different Portal technology), as well as retirement of aspects that are not widely used.
