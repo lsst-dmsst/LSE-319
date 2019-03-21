@@ -95,7 +95,7 @@ commissioning.
 Backend Platform services -- such as access to
 databases, images, and other files -- will be exposed through
 machine-accessible web APIs. These will serve the data using community-accepted
-formats and protocols, making it easy to remotely access the LSST data and DAC
+formats and protocols, making it easy to remotely access the LSST data and DAC	
 services. Furthermore, to ensure maximal exposure of the DAC services through
 the Web APIs, the other two aspects of the Platform -- Portal and JupyterLab -- will
 internally access the LSST datasets using the same Web APIs to the greatest extent possible.
@@ -123,9 +123,10 @@ By making the environments integrated, we allow for a shallower learning curve a
 
 The LSST Science Platform will provide support for collaborative work at two levels:
 \begin{itemize}
-	\item \textbf{Shared workspaces}: Creation and sharing of data sets -- catalogs, images, queries, and other data products -- within a pre-defined group (eg., a research group at a university, or a large science collaboration). Such groups would have access to a shared virtual ``workspace'' within the LSST DAC. This workspace will include shared files, shared catalogs (stored in user databases) as well computing cycles allocated to the group as a whole. This shared workspace will be equally ``visible'' from all three aspects of the platform -- e.g., uploads to the workspace will be possible either through a form in the Portal, from JupyterLab, or using a file transfer client.
+	\item \textbf{Shared workspaces}: Creation and sharing of data sets -- catalogs, images, queries, and other data products -- within either pre-defined or dynamically-created groups (eg., a research group at a university, or a large science collaboration). Such groups would have access to a shared virtual ``workspace'' within the LSST DAC. This workspace will include shared files, shared catalogs (stored in user databases) as well computing cycles allocated to the group as a whole. This shared workspace will be equally ``visible'' from all three aspects of the platform -- e.g., uploads to the workspace will be possible either through a form in the Portal, from JupyterLab, or using a file transfer client.
 
-	\item \textbf{Shared editing}: We look to offer a ``Google Docs''-like collaborative editing, visualization, and data analysis capabilities, \emph{if and when these technologies become available in upstream products}. At present, collaborative editing is on the development roadmap for Jupyter  Notebooks, and will be included into our JupyterLab aspect as it reaches production quality.
+	\item \textbf{Shared editing}: Although we have no formal requirement to to provide shared editing capabilities,  we envisage supporting a a ``Google Docs''-like collaborative editing, visualization, and data analysis capabilities, via the integration of 3rd-party tools, \emph{if and when these technologies become available in upstream products}. 
+	% At present, collaborative editing is on the development roadmap for Jupyter  Notebooks, and will be included into our JupyterLab aspect as it reaches production quality.
 \end{itemize}
 
 The levels of support for collaboration described above are responsive to the large majority of user needs identified by end-user focus groups in R\&D. At the same time, they minimize the technical risks by leveraging widely used and well understood technologies (SDSS-like MyDB user databases, backend authentication \& authorization mechanisms, VO protocols, Jupyter).
