@@ -3,11 +3,11 @@
 \subsection{Goals}
 
 The LSST is a facility whose primary mission is to acquire, process, and
-make available the data\footnote{This includes the raw and processed calibration and engineering data, in addition to the data collected by the science sensors. Because much of LSST science will be systematics limited, access to engineering data will enable a better understanding and correction of subtle instrumental and/or environmental effects.} collected by its telescope and camera, as well as enable ``next-to-the-data'' creation of added-value (Level 3) data products
-(see the \SRD and the \LSR).
+make available the data\footnote{This includes the raw and processed calibration and engineering data, in addition to the data collected by the science sensors. 
+Because much of LSST science will be systematics limited, access to engineering data will enable a better understanding and correction of subtle instrumental and/or environmental effects.} collected by its telescope and camera, as well as enable ``next-to-the-data'' creation of added-value \textit{User Generated} data products (see the \SRD and the \LSR).
 
 This document describes the vision for the services to be put into place to
-fulfill the ``\emph{making available}'' and ``\emph{Level 3} creation``
+fulfill the ``\emph{making available}'' and ``\emph{User Generated} data product creation``
 aspects of LSST's mission. Its aim is to present a high-level
 description of the data access and analysis services provided at the
 LSST Data Access Centers. It should be read in conjunction with the
@@ -72,7 +72,7 @@ or libraries like Astropy). Furthermore, the offered APIs will allow for federat
 with other astronomical archives, bringing added value to the LSST dataset.
 We describe it in more detail in \secref{sec:apis}.
 
-Enabling these user-facing aspects is a set of backend services. The Data Releases will be organized as catalogs kept in relational database management systems, as well as repositories of files. The alert distribution system will facilitate the distribution of Alert Streams to community brokers and end-users (see the \DPDD for details). These services will be complemented by additional User Database, File Storage, and Batch Computing services, as well as pre-installed Software Tools suite. They will provide the computational power, data storage, and analytics capabilities needed to enable LSST data analysis as well as the creation and federation of Level 3 products. We further describe these in \secref{sec:backend}.
+Enabling these user-facing aspects is a set of backend services. The Data Releases will be organized as catalogs kept in relational database management systems, as well as repositories of files. The alert distribution system will facilitate the distribution of Alert Streams to community brokers and end-users (see the \DPDD for details). These services will be complemented by additional User Database, File Storage, and Batch Computing services, as well as pre-installed Software Tools suite. They will provide the computational power, data storage, and analytics capabilities needed to enable LSST data analysis as well as the creation and federation of \textit{User Generated} data products. We further describe these in \secref{sec:backend}.
 
 Finally, the LSST Science Platform is being envisioned to enable and encourage
 collaborative work.  The capabilities ranging from sharing of derived
