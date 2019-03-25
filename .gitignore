@@ -6,3 +6,5 @@
 *.log
 *.out
 *.toc
+# Ignore built products
+LSE-319.pdf
