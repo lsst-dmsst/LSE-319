@@ -3,8 +3,10 @@
 \subsection{Goals}
 
 The LSST is a facility whose primary mission is to acquire, process, and
-make available the data\footnote{This includes the raw and processed calibration and engineering data, in addition to the data collected by the science sensors. 
-Because much of LSST science will be systematics limited, access to engineering data will enable a better understanding and correction of subtle instrumental and/or environmental effects.} collected by its telescope and camera, as well as enable ``next-to-the-data'' creation of added-value \textit{User Generated} data products (see the \SRD and the \LSR).
+make available the data collected by its telescope and camera,
+\footnote{This includes the raw and processed calibration and engineering data, in addition to the data collected by the science sensors.
+Because much of LSST science will be systematics limited, access to engineering data will enable a better understanding and correction of subtle instrumental and/or environmental effects.}
+as well as enable ``next-to-the-data'' creation of added-value \textit{User Generated} data products (see the \SRD and the \LSR).
 
 This document describes the vision for the services to be put into place to
 fulfill the ``\emph{making available}'' and ``\emph{User Generated} data product creation``
@@ -13,6 +15,10 @@ description of the data access and analysis services provided at the
 LSST Data Access Centers. It should be read in conjunction with the
 LSST Data Products Definition Document (\DPDD), which provides the high-level
 description of LSST data products.
+
+Note that the present document uses the revised, user-facing terminology of ``Prompt'', ``Data Release'', and ``User Generated'' data products, in preference to the corresponding original language of ``Level 1'', ``Level 2'', and ``Level 3'' data products.
+This change, and the correspondence, is discussed in detail in document LPM-231.
+The LSST requirements documents continue to use the original language.
 
 \subsection{LSST Science Platform Overview}
 
@@ -27,8 +33,8 @@ provide the essential data access and visualization services common to
 present day archives.  The Notebook component, based on the Jupyter family
 of technologies (JupyterHub and JupyterLab) will allow for more
 sophisticated next-to-the-data analysis.  These user-visible services will
-provide acces to the underlying core LSST data sets -- the data releases and
-alert streams -- and be supported by the user Database, File Storage,
+provide access to the underlying core LSST data sets -- the data releases and
+alert streams -- and be supported by the User Database, File Storage,
 Computing, and Software Tools components.  Together, they will enable the
 users to access, sub-select, analyze, and perform added-value processing of
 all flavors of LSST Data Products (see text for detail).
@@ -41,38 +47,46 @@ perform next-to-the-data analysis of the LSST data set}. It represents the integ
 set of services that will be offered to LSST users.
 
 The platform exposes the LSST data
-and services to the user through three primary user-facing ``\textit{aspects}'' -- the web \textbf{Portal},
-the \textbf{JupyterLab} analysis environment, and a machine-accessible \textbf{Web API} interface. These aspects provide three different ways to access the data sets and analysis services provided in the LSST Data Access Centers (Figure~\ref{fig:layeredLSP}).
+and services to the user through three primary user-facing ``\textit{Aspects}'' -- the web \textbf{Portal},
+the \textbf{Notebook} analysis environment, and a machine-accessible \textbf{Web API} interface.
+These Aspects provide three different ways to access the data sets and analysis services provided in the LSST Data Access Centers (Figure~\ref{fig:layeredLSP}).
 
-The first, \textbf{Portal}, aspect is a web portal designed to provide the essential data
+The \textbf{Portal Aspect} is a web portal designed to provide the essential data
 access and visualization services through a simple-to-use website.  It will
 enable browsing and visualization of the available datasets in ways the
 users are accustomed to at archives such as IRSA, MAST, or the SDSS archive.
 We describe it in more detail in \secref{sec:portal}.
 
-The second, \textbf{JupyterLab}, aspect will provide a Jupyter Notebook-like interface, and
-is geared towards enabling next-to-the-data analysis. The user experience will
+The \textbf{Notebook Aspect} will provide a Jupyter Notebook-like interface,
+based on JupyterLab, and is geared towards enabling next-to-the-data analysis.
+The user experience will
 be nearly identical to working with Jupyter notebooks locally, except that computation
-and analysis will occur with resources provided at the LSST Data Access Center.  This is an
-implementation of the “bringing computation to the data” paradigm: rather
+and analysis will occur with resources provided at the LSST Data Access Center.
+This is an
+implementation of the ``bringing computation to the data'' paradigm: rather
 than imposing the burden of downloading, storing, and processing (potentially large)
 subsets of LSST data at their home institutions, we will enable our users to
 bring their codes and perform their analysis at the LSST DAC.
 This reduces the barrier to entry and shortens the path to science for
 the LSST science community. We describe it in more detail in \secref{sec:jupyter}.
 
-The third, \textbf{Web API}, aspect of the LSST Science Platform will expose the
+The \textbf{Web API Aspect} of the LSST Science Platform will expose the
 services offered by the LSST Data Access Centers to other software tools and
 services using commonly accepted protocols. For example, industry-standard
 protocols such as WebDAV may be used to expose file data, or Virtual Observatory
 protocols for access to catalogs or images (TAP and SIAP, respectively). This interface will open the
 possibility for remote access and analysis of the LSST  data set using
-applications that the users are already comfortable with (eg., such as TOPCAT
-or libraries like Astropy). Furthermore, the offered APIs will allow for federation
+applications that the users are already comfortable with (e.g., TOPCAT or libraries like Astropy).
+Furthermore, the offered APIs will allow for federation
 with other astronomical archives, bringing added value to the LSST dataset.
 We describe it in more detail in \secref{sec:apis}.
 
-Enabling these user-facing aspects is a set of backend services. The Data Releases will be organized as catalogs kept in relational database management systems, as well as repositories of files. The alert distribution system will facilitate the distribution of Alert Streams to community brokers and end-users (see the \DPDD for details). These services will be complemented by additional User Database, File Storage, and Batch Computing services, as well as pre-installed Software Tools suite. They will provide the computational power, data storage, and analytics capabilities needed to enable LSST data analysis as well as the creation and federation of \textit{User Generated} data products. We further describe these in \secref{sec:backend}.
+Enabling these user-facing Aspects is a set of backend services.
+The Data Releases will be organized as catalogs kept in relational database management systems, as well as repositories of files.
+The alert distribution system will facilitate the distribution of Alert Streams to community brokers and end-users (see the \DPDD for details).
+These services will be complemented by additional User Database, File Storage, and Batch Computing services, as well as a pre-installed Software Tools suite, containing both LSST and community software.
+They will provide the computational power, data storage, and analytics capabilities needed to enable LSST data analysis as well as the creation and federation of \textit{User Generated} data products.
+We further describe these in \secref{sec:backend}.
 
 Finally, the LSST Science Platform is being envisioned to enable and encourage
 collaborative work.  The capabilities ranging from sharing of derived

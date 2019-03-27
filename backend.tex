@@ -1,24 +1,38 @@
 \section{Backend Services\label{sec:backend}}
 
-The user-facing aspects of the LSST Science Platform will be built on top of a number of backend services that can roughly be divided into three categories: \textbf{database services}, \textbf{file services}, and \textbf{batch computing} services (bottom row of Figure~\ref{fig:layeredLSP}). The details of these services are described in the Data Management Design Document (\citeds{LDM-148}) and other associated documents; here, we only provide the high-level guidance as to the capabilities which these services will need to expose to the user (through the three aspects).
+The user-facing Aspects of the LSST Science Platform will be built on top of a number of backend services that can roughly be divided into three categories: \textbf{database services}, \textbf{file services}, and \textbf{batch computing} services (bottom row of Figure~\ref{fig:layeredLSP}).
+The details of these services are described in the Data Management Design Document (\citeds{LDM-148}) and other associated documents; here, we only provide the high-level guidance as to the capabilities which these services will need to expose to the user (through the three Aspects).
 
 \subsection{Database Services}
 
-Key LSST catalogs, both for \textit{Prompt} and \textit{Data Release} data products, will be stored in relational databases and made available for querying by users using the Structured Query Language (SQL) as well as Astronomical Data Query Language (ADQL). These products, and expectations surrounding their schemas, are further described in the \DPDD.
+Key LSST catalogs, both for \textit{Prompt} and \textit{Data Release} data products, will be stored in relational databases and made available for querying by users using
+% the Structured Query Language (SQL) as well as 
+the Astronomical Data Query Language (ADQL), with some restrictions.
+These products, and expectations surrounding their schemas, are further described in the \DPDD.
 
-Besides serving the LSST catalogs, LSST databases will also provide a per-user database space allocation. Within this allocation, end-users (including groups) will be able to store selected or transformed subsets of the LSST dataset, or upload related datasets for joining to the LSST dataset. The size of this allocation is determined by the \SRD requirement to provide 10\% of total LSST computing and storage resources to LSST users.
+Besides serving the LSST catalogs, LSST databases will also provide a per-user database space allocation.
+Within this allocation, end-users (including groups) will be able to store selected or transformed subsets of the LSST dataset, or upload related datasets for joining to the LSST dataset.
+The size of this allocation is determined by the \SRD requirement to provide 10\% of total LSST computing and storage resources to LSST users.
+All users will have a small initial allocation of space, with the possibility of applying to a Resource Allocation Committee for additional quota.
 
 \subsection{File Services}
 
-LSST Science Platform will also provide a per-user file space allocation. End-users (including groups) may use this allocation to upload code, store selected or transformed subsets of the LSST dataset (e.g., images), and in general keep files needed to support their data analysis work. Note that some of this space may be provided in form of an object store, rather than a file system with POSIX-like semantics.
+LSST Science Platform will also provide a per-user file space allocation.
+End-users (including groups) may use this allocation to upload code, store selected or transformed subsets of the LSST dataset (e.g., images), and in general keep files needed to support their data analysis work.
+Note that some of this space may be provided in form of an object store, rather than a file system with POSIX-like semantics.
 
 The size of this allocation is determined by the \SRD requirement to provide 10\% of total LSST computing and storage resources to LSST users.
+As in the case of the user databases, all users will have a small initial allocation of space, with the possibility of applying to a Resource Allocation Committee for additional quota.
 
 \subsection{Batch Computing Services}
 
-Analysis performed through the Portal, JupyterLab, and Web API will be served by a shared computing cluster. This cluster will be managed by a workload management system that ensures resources are allocated to individual users or groups based on pre-determined operational policies. The size of the batch computing resource is determined by the \SRD requirement to provide 10\% of total LSST computing and storage resources to LSST users.
+Analysis performed through the Portal, Notebook, and Web API Aspects will be served by a shared computing cluster.
+This cluster will be managed by a workload management system that ensures resources are allocated to individual users or groups based on pre-determined operational policies.
+The size of the batch computing resource is determined by the \SRD requirement to provide 10\% of total LSST computing and storage resources to LSST users.
+Again, all users will have a small initial allocation of batch CPU time, with the possibility of applying to a Resource Allocation Committee for additional quota.
 
-The users will be able to launch jobs on the batch computing cluster primarily utilizing the APIs exposed through the JupyterLab and Web API aspects of the LSST Science Platform. Some functionality exposed through the Portal may potentially utilize the batch computing cluster as well.
+The users will be able to launch jobs on the batch computing cluster primarily utilizing the APIs exposed through the Notebook and Web API Aspects of the LSST Science Platform.
+Some functionality exposed through the Portal may potentially utilize the batch computing cluster as well.
 
 %\subsection{Overall User Experience}
 %
@@ -44,4 +58,4 @@ The users will be able to launch jobs on the batch computing cluster primarily u
 %(e.g., national supercomputing centers, university computing centers, or the
 %public cloud).
 %
-%\subsection{Integrated aspect: the User Workspace}
+%\subsection{Integrated Aspect: the User Workspace}
