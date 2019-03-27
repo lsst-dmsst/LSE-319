@@ -44,19 +44,20 @@ directly satisfied by the Notebook Aspect.
 
 \begin{figure}
 	\centering
-	\scalebox{0.4}{\includegraphics[scale=0.45]{images/fig-jupyterlabdemo}}
-	\caption{A screen capture of the JupyterLab interface running LSST image processing code within a notebook. \label{fig:JupyterLab}}
+	\scalebox{0.6}{\includegraphics[scale=0.9]{images/fig-notebook-imagequality}}
+	\caption{A screen capture of the Notebook interface running LSST image processing code within a notebook. \label{fig:JupyterLab}}
 \end{figure}
 
-The \textbf{Notebook Aspect}, based on the Jupyter family of technologies (such as JupyterHub and JupyterLab), 
+The \textbf{Notebook Aspect}
+%, based on the Jupyter family of technologies (such as JupyterHub and JupyterLab), 
 will be provided to allow for more sophisticated data selection, analysis, and creation of added value \textit{User Generated} data products. 
-A screen capture of a mature prototype of JupyterLab is shown in Figure~\ref{fig:JupyterLab}.
+A screen capture of a mature prototype of the Notebook Aspect is shown in Figure~\ref{fig:JupyterLab}.
 
 The Notebook Aspect user experience will be nearly identical to working with
 Jupyter notebooks locally, except that computation and analysis will occur
 at resources provided at the LSST Data Access Center.
 This is an
-implementation of the “bringing analysis to the data” paradigm: rather
+implementation of the ``bringing analysis to the data'' paradigm: rather
 than imposing the burden of downloading, storing, and processing (large)
 subsets of LSST data at their home institutions, we will enable our users to
 bring their codes to and perform their analysis at the LSST DAC.  We expect
@@ -76,7 +77,8 @@ quality assessment, and science validation of the as-built system.
 It will be the primary
 method of performing interactive analysis of acquired data (e.g., adjusting and executing
 prepared notebooks driving commissioning tasks), as well as commanding
-the batch resources to execute larger processing tasks. Due to this, we expect the
+the batch resources to execute larger processing tasks.
+Due to this, we expect the
 Notebook Aspect to reach maturity earlier than the others, and certainly in time for
 commissioning.
 
@@ -97,26 +99,25 @@ machine-accessible web APIs.
 These will serve the data using community-accepted
 formats and protocols, making it easy to remotely access the LSST data and DAC	
 services.
-Furthermore, to ensure maximal exposure of the DAC services through
-the Web APIs, the other two Aspects of the Platform -- Portal and Notebook -- will
+Furthermore, to ensure maximal exposure of the DAC services through the Web APIs,
+the other two Aspects of the Platform --- Portal and Notebook --- will
 internally access the LSST datasets using the same Web APIs to the greatest extent possible.
 
-Exposing the LSST data through Virtual Observatory interfaces plays a particularly
-important role. It will allow the discoverability of LSST data products from within
-the Virtual Observatory, and the federation of the LSST data set to other
-archives, as well as enabling the use of widely utilized tools such as TOPCAT or DS9 by the
-end-users.
-The latter will further lower the barrier to access to LSST data, shortening the path to science.
-It will also allow these tools to be used in commissioning.
+Exposing the LSST data through Virtual Observatory interfaces plays a particularly important role.
+This will allow the discoverability of LSST data products from within the Virtual Observatory,
+and federation of the LSST data set to other archives.
+It will also enable the use of widely utilized tools such as TOPCAT or DS9 by the end-users,
+further lowering the barrier to access to LSST data, and shortening the path to science.
+It will also allow these tools to be used in commissioning,
+easing the way for scientists new to the LSST environment to access the data and make meaningful
+contributions to this time-compressed activity.
 
-LSST will use IVOA-standard interfaces wherever practical,
+LSST will follow a ``VO-first'' strategy, using IVOA-standard interfaces wherever practical,
 though we may also provide some services using custom protocols in areas where relevant standards have not yet been developed.
 LSST will actively participate in the IVOA community, and will propose evolutions of standards when we find problems and where we feel that our custom work could be of broader benefit to the community.
 We will also use our engagement with the IVOA to ensure that we are following mainstream interpretations of the standards and to maintain contact with the authors of client software such as TOPCAT.
 
-While this document does not proscribe a full set of protocols and formats
-to expose the LSST data, VO Simple Cone Search and TAP (for catalogs) and
-SIAP (for images) must be supported.
+Additional details on the standards to be supported are provided below.
 
 \subsection{Integrated environment}
 
@@ -128,21 +129,27 @@ This will allow a user to build a query using the Portal's TAP query UI componen
 The reverse flow will also be enabled; a user can code and submit a complex SQL query in the Notebook, and then browse and visualize the results in the Portal.
 
 By making the environments integrated, we allow for a shallower learning curve and a gradual transition to more complex environments at the point they are needed.
-For example, a user may begin interacting with the LSST dataset using the Portal Aspect but may ultimately reach the limitations of selection tools it provides.
-The integrated nature of the platform will allow such a user to switch to JupyterLab, and continue working on the data analysis started in the Portal.
+For example, a user may begin interacting with the LSST dataset using the Portal Aspect but may ultimately reach the limitations of the selection and analysis tools it provides.
+The integrated nature of the platform will allow such a user to switch to the Notebook Aspect, and continue working on the data analysis started in the Portal.
 There, they will be able to import the analysis artifacts (e.g., catalog subsets) as standard Python objects (e.g., as astropy.table).
+
+\subsection{Next to Data Processing\label{sec:n2d}}
+Many LSST science cases will require analysis of the full LSST Object and/or Source tables; subsetting and downloading reduced catalogs will not suffice for science that requires, for example, fitting and computing features of light curves for large numbers of Objects, creating maps of stellar density, or training machine learning models.
+The LSST Object table alone will be $\approx$~50TB for Data Release 1 and $\approx$~300TB for Data Release 11 at the close of the 10-year survey.
+The LSST Science Platform will enable user-driven large-scale search and analysis capabilities of the LSST data by providing a \textit{Next-to-Data} processing environment, allowing users to bring their analysis to the data.
+This environment will be supported by backend services, as described in \ref{sec:backend}
 
 \subsection{Supporting Collaborative Work\label{sec:collab}}
 
 The LSST Science Platform will provide support for collaborative work at two levels:
 \begin{itemize}
-	\item \textbf{Shared workspaces}: Creation and sharing of data sets -- catalogs, images, queries, and other data products -- within either pre-defined or dynamically-created groups (e.g., a research group at a university, or a large science collaboration).
+	\item \textbf{Shared workspaces}: Creation and sharing of data sets --- catalogs, images, queries, and other data products --- within either pre-defined or dynamically-created groups (e.g., a research group at a university, or a large science collaboration).
 Such groups would have access to a shared virtual ``workspace'' within the LSST DAC.
-This workspace will include shared files, shared catalogs (stored in user databases) as well computing cycles allocated to the group as a whole.
-This shared workspace will be equally ``visible'' from all three Aspects of the platform -- e.g., uploads to the workspace will be possible either through a form in the Portal, from JupyterLab, or using an external file transfer client via WebDAV or VOSpace.
+This workspace will include shared files, shared catalogs (stored in user databases) as well as computing cycles allocated to the group as a whole.
+This shared workspace will be equally ``visible'' from all three Aspects of the platform --- e.g., uploads to the workspace will be possible either through a form in the Portal, POSIX-style file access from JupyterLab, or using an external file transfer client via WebDAV or VOSpace.
 
-	\item \textbf{Shared editing}: Although we have no formal requirement to provide shared editing capabilities, we envisage supporting a ``Google Docs''-like collaborative editing, visualization, and data analysis capabilities, via the integration of 3rd-party tools, \emph{if and when these technologies become available in upstream products}. 
-	% At present, collaborative editing is on the development roadmap for Jupyter Notebooks, and will be included into our JupyterLab Aspect as it reaches production quality.
+	\item \textbf{Shared editing}: Although we have no formal requirement to provide shared editing capabilities, we envisage supporting ``Google Docs''-like collaborative editing, visualization, and data analysis capabilities, via the integration of 3rd-party tools, \emph{if and when these technologies become available in upstream products}.
+	% At present, collaborative editing is on the development roadmap for Jupyter Notebooks, and will be included into our Notebook Aspect as it reaches production quality.
 \end{itemize}
 
 The levels of support for collaboration described above are responsive to the large majority of user needs identified by end-user focus groups in R\&D. At the same time, they minimize the technical risks by leveraging widely used and well understood technologies (SDSS-like MyDB user databases, backend authentication \& authorization mechanisms, VO protocols, Jupyter).
