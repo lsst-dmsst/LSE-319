@@ -6,7 +6,7 @@ The LSST is a facility whose primary mission is to acquire, process, and
 make available the data collected by its telescope and camera,
 \footnote{This includes the raw and processed calibration and engineering data, in addition to the data collected by the science sensors.
 Because much of LSST science will be systematics limited, access to engineering data will enable a better understanding and correction of subtle instrumental and/or environmental effects.}
-as well as enable ``next-to-the-data'' creation of added-value \textit{User Generated} data products (see the \SRD and the \LSR).
+as well as enable ``next-to-the-data'' creation of added-value \emph{User Generated} data products (see the \SRD and the \LSR).
 
 This document describes the vision for the services to be put into place to
 fulfill the ``\emph{making available}'' and ``\emph{User Generated} data product creation``
@@ -47,7 +47,7 @@ perform next-to-the-data analysis of the LSST data set}. It represents the integ
 set of services that will be offered to LSST users.
 
 The platform exposes the LSST data
-and services to the user through three primary user-facing ``\textit{Aspects}'' --- the web \textbf{Portal},
+and services to the user through three primary user-facing ``\emph{Aspects}'' --- the web \textbf{Portal},
 the \textbf{Notebook} analysis environment, and a machine-accessible \textbf{Web API} interface.
 These Aspects provide three different ways to access the data sets and analysis services provided in the LSST Data Access Centers (Figure~\ref{fig:layeredLSP}).
 
@@ -82,11 +82,11 @@ Furthermore, the offered APIs will allow for federation
 with other astronomical archives, bringing added value to the LSST dataset.
 We describe it in more detail in \secref{sec:apis}.
 
-Enabling these user-facing Aspects is a set of backend services.
+The user-facing Aspects all depend on a common set of back-end services, which facilitate the LSP's operation as an integrated whole.
 The Data Releases will be organized as catalogs kept in relational database management systems, as well as repositories of files.
 The alert distribution system will facilitate the distribution of Alert Streams to community brokers and end-users (see the \DPDD for details).
 These services will be complemented by additional User Database, File Storage, and Batch Computing services, as well as a pre-installed Software Tools suite, containing both LSST and community software.
-They will provide the computational power, data storage, and analytics capabilities needed to enable LSST data analysis as well as the creation and federation of \textit{User Generated} data products.
+They will provide the computational power, data storage, and analytics capabilities needed to enable LSST data analysis as well as the creation and federation of \emph{User Generated} data products.
 We further describe these in \secref{sec:backend}.
 
 Finally, the LSST Science Platform is being envisioned to enable and encourage

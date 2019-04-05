@@ -49,8 +49,8 @@ directly satisfied by the Notebook Aspect.
 \end{figure}
 
 The \textbf{Notebook Aspect}
-%, based on the Jupyter family of technologies (such as JupyterHub and JupyterLab), 
-will be provided to allow for more sophisticated data selection, analysis, and creation of added value \textit{User Generated} data products. 
+%, based on the Jupyter family of technologies (such as JupyterHub and JupyterLab),
+will be provided to allow for more sophisticated data selection, analysis, and creation of added value \emph{User Generated} data products.
 A screen capture of a mature prototype of the Notebook Aspect is shown in Figure~\ref{fig:JupyterLab}.
 
 The Notebook Aspect user experience will be nearly identical to working with
@@ -66,18 +66,17 @@ the LSST science community.
 
 We will provide JupyterLab instances to LSST users in an environment carrying a
 library of preinstalled commonly used and useful software tools:
-Astropy, the LSST science pipelines, Anaconda Scientific Python Distribution, the PyViz visualization toolkit, and others. 
+Astropy, the LSST science pipelines, Anaconda Scientific Python Distribution, the PyViz visualization toolkit, and others.
 The users will be able to upload and install their own tools as well.
-Non-trivial shared computing cluster resources will be accessible through this environment as well, enabling the generation of \textit{User Generated} data products.
+Non-trivial shared computing cluster resources will be accessible through this environment as well, enabling the generation of \emph{User Generated} data products.
 
 % Add something about writing glue code to make it easy to submit jobs, and how Notebooks will be the primary user interface to the backend batch system...
 
 The Notebook Aspect of the science platform will play a key role in commissioning,
 quality assessment, and science validation of the as-built system.
-It will be the primary
-method of performing interactive analysis of acquired data (e.g., adjusting and executing
-prepared notebooks driving commissioning tasks), as well as commanding
-the batch resources to execute larger processing tasks.
+It will be the primary method of performing interactive analysis of acquired data
+(e.g., adjusting and executing prepared notebooks driving commissioning tasks).
+Through the terminal functionality of the JupyterLab environment, it will also permit commanding the batch resources to execute larger processing tasks.
 Due to this, we expect the
 Notebook Aspect to reach maturity earlier than the others, and certainly in time for
 commissioning.
@@ -121,7 +120,7 @@ Additional details on the standards to be supported are provided below.
 
 \subsection{Integrated environment}
 
-All the Aspects of the LSST Science Platform are intended to be \textit{well integrated}, enabling a seamless workflow so the users will be able to move back and forth between them as needs dictate.
+All the Aspects of the LSST Science Platform are intended to be \emph{well integrated}, enabling a seamless workflow so the users will be able to move back and forth between them as needs dictate.
 The aim is to enable a user to find or create data in one Platform Aspect, and view or analyze that data in another.
 
 As an example of how these connections can aid a user in exploring the LSST data, data queries will be shareable across the Portal, Notebook, and Web API Aspects.
@@ -136,7 +135,7 @@ There, they will be able to import the analysis artifacts (e.g., catalog subsets
 \subsection{Next to Data Processing\label{sec:n2d}}
 Many LSST science cases will require analysis of the full LSST Object and/or Source tables; subsetting and downloading reduced catalogs will not suffice for science that requires, for example, fitting and computing features of light curves for large numbers of Objects, creating maps of stellar density, or training machine learning models.
 The LSST Object table alone will be $\approx$~50TB for Data Release 1 and $\approx$~300TB for Data Release 11 at the close of the 10-year survey.
-The LSST Science Platform will enable user-driven large-scale search and analysis capabilities of the LSST data by providing a \textit{Next-to-Data} processing environment, allowing users to bring their analysis to the data.
+The LSST Science Platform will enable user-driven large-scale search and analysis capabilities of the LSST data by providing a \emph{Next-to-Data} processing environment, allowing users to bring their analysis to the data.
 This environment will be supported by backend services, as described in \ref{sec:backend}
 
 \subsection{Supporting Collaborative Work\label{sec:collab}}
