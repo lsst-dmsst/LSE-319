@@ -42,7 +42,7 @@ directly satisfied by the Notebook Aspect.
 
 \subsection{Notebook (JupyterLab) Aspect\label{sec:jupyter}}
 
-\begin{figure}
+\begin{sidewaysfigure}
 	\centering
 	\scalebox{0.6}{\includegraphics[scale=0.9]{images/fig-notebook-imagequality}}
 	\caption{A screen capture of the Notebook interface running LSST image processing code within a notebook. \label{fig:JupyterLab}}
@@ -125,7 +125,7 @@ The aim is to enable a user to find or create data in one Platform Aspect, and v
 
 As an example of how these connections can aid a user in exploring the LSST data, data queries will be shareable across the Portal, Notebook, and Web API Aspects.
 This will allow a user to build a query using the Portal's TAP query UI component, view the (possibly preliminary) results by browsing them in place in the Portal, and then access the final results from a JupyterLab notebook or a remotely connected client (e.g., TOPCAT) for further analysis.
-The reverse flow will also be enabled; a user can code and submit a complex SQL query in the Notebook, and then browse and visualize the results in the Portal.
+The reverse flow will also be enabled; a user can code and submit a complex ADQL query in the Notebook, and then browse and visualize the results in the Portal.
 
 By making the environments integrated, we allow for a shallower learning curve and a gradual transition to more complex environments at the point they are needed.
 For example, a user may begin interacting with the LSST dataset using the Portal Aspect but may ultimately reach the limitations of the selection and analysis tools it provides.
